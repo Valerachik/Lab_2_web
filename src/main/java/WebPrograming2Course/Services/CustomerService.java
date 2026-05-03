@@ -5,22 +5,25 @@ import java.util.List;
 
 public class CustomerService {
     private CustomerDAO customerDAO = new CustomerDAO();
-    public List<Customer> getAllPizzas() {
+    public List<Customer> getAllCustomers() {
         return customerDAO.GetAllCustomers();
     }
-    public void SavePizza(Customer customer) {
+    public void SaveCustomer(Customer customer) {
         customerDAO.SaveCustomer(customer);
     }
-    public void UpdatePizzaName(Customer customer) {
+    public void UpdateCustomerName(Customer customer) {
         customerDAO.UpdateCustomerName(customer.getId(), customer.getName());
     }
-    public void UpdatePizzaSurName(Customer customer) {
+    public void UpdateCustomerSurName(Customer customer) {
         customerDAO.UpdateCustomerSurName(customer.getId(), customer.getSurname());
     }
-    public void UpdatePizzaPhone(Customer customer) {
+    public void UpdateCustomerPhone(Customer customer) {
         customerDAO.UpdateCustomerPhone(customer.getId(), customer.getPhone());
     }
-    public void deletePizza(int id) {
+    public void deleteCustomer(int id) {
         customerDAO.DeleteCustomer(id);
+    }
+    public Customer GetCustomerById(int id){
+        return customerDAO.GetCustomerById(id);
     }
 }

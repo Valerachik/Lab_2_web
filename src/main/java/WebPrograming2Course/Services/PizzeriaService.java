@@ -8,16 +8,16 @@ import java.util.List;
 
 public class PizzeriaService {
     private PizzeriaDAO pizzeriaDAO = new PizzeriaDAO();
-    public List<Pizzeria> getAllPizzas() {
+    public List<Pizzeria> getAllPizzerias() {
         return pizzeriaDAO.GetAllPizzerias();
     }
-    public void SavePizza(Pizzeria pizzeria) {
+    public void SavePizzeria(Pizzeria pizzeria) {
         pizzeriaDAO.SavePizzeria(pizzeria);
     }
-    public void UpdatePizzaName(Pizzeria pizzeria) {
+    public void UpdatePizzeriaName(Pizzeria pizzeria) {
         pizzeriaDAO.UpdatePizzeriaName(pizzeria.getId(), pizzeria.getName());
     }
-    public void deletePizza(int id) {
+    public void deletePizzeria(int id) {
         pizzeriaDAO.DeletePizzeria(id);
     }
 }

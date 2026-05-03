@@ -29,7 +29,6 @@ public class PizzaDAO {
             em.close();
         }
     }
-
     public Pizza GetPizzaById(int id) {
         EntityManager em = emf.createEntityManager();
         try {

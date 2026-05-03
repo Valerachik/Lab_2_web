@@ -11,10 +11,13 @@ public class PizzaService {
     public void SavePizza(Pizza pizza) {
         pizzaDAO.SavePizza(pizza);
     }
-    public void UpdatePizzaName(Pizza pizza) {
-        pizzaDAO.UpdatePizzaName(pizza.getId(), pizza.getName());
+    public void UpdatePizzaName(int id, String name) {
+        pizzaDAO.UpdatePizzaName(id, name);
     }
     public void deletePizza(int id) {
         pizzaDAO.DeletePizza(id);
+    }
+    public Pizza GetPizzaById(int id){
+       return pizzaDAO.GetPizzaById(id);
     }
 }

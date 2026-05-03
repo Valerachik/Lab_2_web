@@ -1,5 +1,7 @@
 package WebPrograming2Course;
 
+import WebPrograming2Course.Services.CustomerService;
+import WebPrograming2Course.Services.PizzaService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,20 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import WebPrograming2Course.DAO.PizzaDAO;
-import WebPrograming2Course.DAO.CustomerDAO;
 import WebPrograming2Course.Entities.Pizza;
 import WebPrograming2Course.Entities.Customer;
 
 @WebServlet("/pizzas")
 public class PizzaServlet extends HttpServlet {
-    private PizzaDAO pizzaDAO;
-    private CustomerDAO customerDAO;
+    private PizzaService pizzaService;
+    private CustomerService customerService;
 
     @Override
     public void init() {
-        pizzaDAO = new PizzaDAO();
-        customerDAO = new CustomerDAO();
+        pizzaService = new PizzaService();
+        customerService = new CustomerService();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PizzaServlet extends HttpServlet {
                     deletePizza(request, response);
                     break;
                 default:
-                    listPizzas(request, response);
+                    showNewForm(request, response);
                     break;
             }
         } catch (Exception ex) {
@@ -51,37 +51,37 @@ public class PizzaServlet extends HttpServlet {
         }
     }
 
-    private void listPizzas(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Pizza> listPizza = pizzaDAO.GetAllPizzas();
-        request.setAttribute("listPizza", listPizza);
-        request.getRequestDispatcher("/pizza-list.jsp").forward(request, response);
-    }
+    // private void listPizzas(HttpServletRequest request, HttpServletResponse response)
+   //         throws ServletException, IOException {
+   //     List<Pizza> listPizza = pizzaService.getAllPizzas();
+  //      request.setAttribute("listPizza", listPizza);
+  //      request.getRequestDispatcher("/pizza-list.jsp").forward(request, response);
+  //  }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Customer> listCustomers = customerDAO.GetAllCustomers();
+        List<Customer> listCustomers = customerService.getAllCustomers();
         request.setAttribute("listCustomers", listCustomers);
-        request.getRequestDispatcher("/pizza-form.jsp").forward(request, response);
+        request.getRequestDispatcher("/Create order.jsp").forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
-        Pizza existingPizza = pizzaDAO.GetPizzaById(id);
+        Pizza existingPizza = pizzaService.GetPizzaById(id);
         request.setAttribute("pizza", existingPizza);
 
-        List<Customer> listCustomers = customerDAO.GetAllCustomers();
+        List<Customer> listCustomers = customerService.getAllCustomers();
         request.setAttribute("listCustomers", listCustomers);
 
-        request.getRequestDispatcher("/pizza-form.jsp").forward(request, response);
+        request.getRequestDispatcher("/Create order.jsp").forward(request, response);
     }
 
     private void deletePizza(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        pizzaDAO.DeletePizza(id);
+        pizzaService.deletePizza(id);
         response.sendRedirect("pizzas");
     }
 
@@ -97,7 +97,7 @@ public class PizzaServlet extends HttpServlet {
         Customer selectedCustomer = null;
         if (customerIdStr != null && !customerIdStr.isEmpty()) {
             int customerId = Integer.parseInt(customerIdStr);
-            selectedCustomer = customerDAO.GetCustomerById(customerId); // Знаходимо замовника в БД
+            selectedCustomer = customerService.GetCustomerById(customerId); // Знаходимо замовника в БД
         }
 
         if (idStr == null || idStr.isEmpty()) {
@@ -105,11 +105,10 @@ public class PizzaServlet extends HttpServlet {
             Pizza newPizza = new Pizza();
             newPizza.setName(name);
             newPizza.setCustomer(selectedCustomer); // Прив'язуємо замовника!
-            pizzaDAO.SavePizza(newPizza);
+            pizzaService.SavePizza(newPizza);
         } else {
-            // Оновлення (тут для простоти оновлюємо тільки назву, але можна додати й оновлення замовника)
             int id = Integer.parseInt(idStr);
-            pizzaDAO.UpdatePizzaName(id, name);
+            pizzaService.UpdatePizzaName(id,name);
         }
 
         response.sendRedirect("pizzas");
