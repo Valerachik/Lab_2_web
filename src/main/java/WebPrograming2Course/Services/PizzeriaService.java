@@ -1,7 +1,5 @@
 package WebPrograming2Course.Services;
 import WebPrograming2Course.DAO.PizzeriaDAO;
-import WebPrograming2Course.Entities.Pizza;
-import WebPrograming2Course.DAO.PizzaDAO;
 import WebPrograming2Course.Entities.Pizzeria;
 
 import java.util.List;
@@ -19,5 +17,8 @@ public class PizzeriaService {
     }
     public void deletePizzeria(int id) {
         pizzeriaDAO.DeletePizzeria(id);
+    }
+    public Pizzeria GetPizzeriaById(int id){
+        return pizzeriaDAO.GetPizzeriaById(id);
     }
 }

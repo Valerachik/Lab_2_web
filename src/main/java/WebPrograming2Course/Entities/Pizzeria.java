@@ -11,31 +11,24 @@ public class Pizzeria {
     private String name;
 
     @OneToMany(mappedBy = "pizzeria")
-    private List<Pizza> pizzas;
-
+    private List<PizzaOrder> orders;
     public Pizzeria(){}
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
-    public List<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
-    }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
+    }
+    public List<PizzaOrder> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<PizzaOrder> orders) {
+        this.orders = orders;
     }
 }

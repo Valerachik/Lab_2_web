@@ -13,47 +13,37 @@ public class Customer {
     private String phone;
 
     @OneToMany(mappedBy = "customer")
-    private List<Pizza> pizzas;
+    private List<PizzaOrder> orders;
 
     public Customer() {}
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     public String getName() {
         return name;
     }
-
     public String getSurname() {
         return surname;
     }
-
     public String getPhone() {
         return phone;
     }
-
-    public List<Pizza> getPizza() {
-        return pizzas;
+    public List<PizzaOrder> getOrders() {
+        return orders;
     }
-
-    public void setPizza(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
+    public void setOrders(List<PizzaOrder> orders) {
+        this.orders = orders;
     }
 }

@@ -10,7 +10,7 @@
         <class>WebPrograming2Course.Entities.Pizza</class>
         <class>WebPrograming2Course.Entities.Customer</class>
         <class>WebPrograming2Course.Entities.Pizzeria</class>
-
+        <class>WebPrograming2Course.Entities.PizzaOrder</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Pizzeria"/>

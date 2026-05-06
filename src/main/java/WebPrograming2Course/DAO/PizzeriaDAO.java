@@ -54,4 +54,12 @@ public class PizzeriaDAO {
             em.close();
         }
     }
+    public Pizzeria GetPizzeriaById(int id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.find(Pizzeria.class, id);
+        } finally {
+            em.close();
+        }
+    }
 }

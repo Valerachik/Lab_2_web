@@ -5,6 +5,7 @@ import java.util.List;
 
 public class PizzaService {
     private PizzaDAO pizzaDAO = new PizzaDAO();
+
     public List<Pizza> getAllPizzas() {
         return pizzaDAO.GetAllPizzas();
     }
